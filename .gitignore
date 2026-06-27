@@ -1,0 +1,40 @@
+# Unreal generated directories
+Binaries/
+Build/
+DerivedDataCache/
+Intermediate/
+Saved/
+
+# Unreal generated project files
+*.sln
+*.suo
+*.xcodeproj
+*.xcworkspace
+
+# Build outputs and debug symbols
+*.dll
+*.exe
+*.lib
+*.pdb
+*.obj
+*.ilk
+*.exp
+
+# IDE/editor state
+.vs/
+.vscode/
+.idea/
+*.VC.db
+*.VC.opendb
+
+# OS noise
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Keep source assets and Unreal project files tracked.
+!*.uproject
+!Config/
+!Content/
+!Plugins/
+!Source/
