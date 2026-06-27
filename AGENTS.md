@@ -40,3 +40,4 @@ When Copilot or another reviewer comments on a PR, acknowledge the review delibe
 - Add a top-level PR comment summarizing the feedback, the agent's view, and what was changed or intentionally left unchanged.
 - State the reasoning clearly so future us can understand the decision without guessing.
 - Do not silently apply review feedback; make the tradeoff or agreement explicit.
+- Before merging, confirm every Copilot or reviewer comment has either been addressed, explicitly deferred, or answered with the reason it will not be changed.

@@ -17,6 +17,11 @@ When addressing review feedback:
 - Be explicit when accepting, rejecting, or deferring a suggestion.
 - Prefer visible reasoning over silent changes.
 
+Before merging a PR:
+
+- Confirm every Copilot or reviewer comment has been acknowledged.
+- Do not merge with unresolved silent feedback; either address it, defer it with a follow-up, or explain why no change is being made.
+
 ## Engineering Principle
 
 This project is not just trying to make something work once. It is building composable, extensible components that give Tumult room to evolve.
