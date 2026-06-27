@@ -1,0 +1,22 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{C08ABFB0-446E-CD21-F3F8-7C97BBA02A9A}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "TumultUE",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "ModelingToolsEditorMode",
+			"Enabled": true,
+			"TargetAllowList": [
+				"Editor"
+			]
+		}
+	]
+}

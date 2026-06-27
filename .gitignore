@@ -7,9 +7,12 @@ Saved/
 
 # Unreal generated project files
 *.sln
+*.slnx
 *.suo
 *.xcodeproj
 *.xcworkspace
+UpgradeLog*.htm
+Backup/
 
 # Build outputs and debug symbols
 *.dll

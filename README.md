@@ -47,6 +47,17 @@ Location: C:\Users\kirk\personal\tumult-ue
 
 After creation, the repo should contain `TumultUE.uproject`, `Source/`, `Config/`, and any initial Unreal content.
 
+If Unreal creates a project subdirectory, the expected shape is:
+
+```text
+tumult-ue/
+  TumultUE/
+    TumultUE.uproject
+    Config/
+    Content/
+    Source/
+```
+
 ## First Goal
 
 Open `TumultUE` in Unreal, press Play, and show that Unreal can call Tumult rules code.
