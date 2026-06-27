@@ -6,6 +6,17 @@ All changes that land on `main` must come through pull requests.
 
 Use feature branches for work, merge PRs into `main` with merge commits, and delete feature branches after merge.
 
+## Review Workflow
+
+Copilot review comments are part of the deliberate decision trail.
+
+When addressing review feedback:
+
+- Reply to specific threads when a comment is addressed directly.
+- Leave a top-level PR comment that summarizes the feedback, the project view, and the action taken.
+- Be explicit when accepting, rejecting, or deferring a suggestion.
+- Prefer visible reasoning over silent changes.
+
 ## Engineering Principle
 
 This project is not just trying to make something work once. It is building composable, extensible components that give Tumult room to evolve.
