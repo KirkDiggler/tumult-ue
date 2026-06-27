@@ -29,6 +29,8 @@ Unreal hosts, displays, and authors content at the boundary. Tumult owns game ru
 - Build durable seams before adding gameplay breadth.
 - Do not treat a working Unreal demo as success if it creates a brittle foundation.
 - Use feature branches and PRs for changes after the initial scaffold.
+- Start sessions from project board 16, then pick the narrowest `Today` or `Weekend` issue that moves the foundation forward.
+- Use `docs/development-loop.md` for the Windows/WSL split before touching Unreal-generated files.
 
 ## PR Review Acknowledgement
 
@@ -38,3 +40,4 @@ When Copilot or another reviewer comments on a PR, acknowledge the review delibe
 - Add a top-level PR comment summarizing the feedback, the agent's view, and what was changed or intentionally left unchanged.
 - State the reasoning clearly so future us can understand the decision without guessing.
 - Do not silently apply review feedback; make the tradeoff or agreement explicit.
+- Before merging, confirm every Copilot or reviewer comment has either been addressed, explicitly deferred, or answered with the reason it will not be changed.
