@@ -74,4 +74,6 @@ No editor tooling, card authoring, or full HUD is required for the first milesto
 
 Changes land on `main` through pull requests with merge commits. Feature branches are deleted after merge.
 
+For the practical Windows/WSL split, see `docs/development-loop.md`.
+
 See `CONTRIBUTING.md` for the project engineering principle.

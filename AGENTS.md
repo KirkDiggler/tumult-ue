@@ -29,6 +29,8 @@ Unreal hosts, displays, and authors content at the boundary. Tumult owns game ru
 - Build durable seams before adding gameplay breadth.
 - Do not treat a working Unreal demo as success if it creates a brittle foundation.
 - Use feature branches and PRs for changes after the initial scaffold.
+- Start sessions from project board 16, then pick the narrowest `Today` or `Weekend` issue that moves the foundation forward.
+- Use `docs/development-loop.md` for the Windows/WSL split before touching Unreal-generated files.
 
 ## PR Review Acknowledgement
 
