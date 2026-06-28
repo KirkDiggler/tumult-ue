@@ -1,5 +1,6 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
+using System.IO;
 using UnrealBuildTool;
 
 public class TumultUE : ModuleRules
@@ -7,8 +8,18 @@ public class TumultUE : ModuleRules
 	public TumultUE(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
-	
+		CppStandard = CppStandardVersion.Cpp20;
+
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput" });
+
+		PrivateIncludePaths.Add(Path.GetFullPath(Path.Combine(
+			ModuleDirectory,
+			"..",
+			"..",
+			"..",
+			"..",
+			"tumult",
+			"include")));
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 
