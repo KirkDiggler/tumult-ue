@@ -50,3 +50,17 @@ When Windows verification is needed, make the WSL change easy to inspect first:
 - Summarize exactly what needs to be opened, built, or played in Unreal.
 - If Windows reveals friction, document it in the PR or open a follow-up issue
   instead of widening the current task.
+
+## PR Review Checkpoints
+
+Treat review as part of the work, not an afterthought:
+
+- Push the PR branch only after local diffs and available builds/checks are
+  clean.
+- Wait for reviewer or Copilot feedback before asking Kirk to merge.
+- Acknowledge each review thread deliberately: either apply the change, defer it
+  with a reason, or explain why it should not change.
+- Add a top-level PR comment summarizing the review feedback, the decision, and
+  the verification after the response.
+- Tell Kirk only after the review has been acknowledged and the branch is pushed
+  again, because those are decision checkpoints in the session.

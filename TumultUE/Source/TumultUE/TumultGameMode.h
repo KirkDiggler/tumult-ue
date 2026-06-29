@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
+#include "Tumult.h"
 #include "TumultGameMode.generated.h"
 
 UCLASS()
@@ -13,4 +14,7 @@ class TUMULTUE_API ATumultGameMode : public AGameModeBase
 
 protected:
 	virtual void BeginPlay() override;
+
+private:
+	tumult::Encounter Encounter_;
 };
