@@ -3,7 +3,7 @@
 # Usage: TumultUE/scripts/sync-tumult.sh
 set -euo pipefail
 
-TUMULT_TAG="v0.1.0"
+TUMULT_TAG="v0.2.0"
 RPGKIT_TAG="v0.3.0"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
