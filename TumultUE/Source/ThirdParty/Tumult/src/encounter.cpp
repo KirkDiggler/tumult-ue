@@ -70,6 +70,7 @@ CombatantView viewOf(const Character& character) {
 
 std::vector<CombatantView> Encounter::combatants() const {
   std::vector<CombatantView> views;
+  views.reserve(2);
   if (hasHero_) {
     views.push_back(viewOf(hero_));
   }
