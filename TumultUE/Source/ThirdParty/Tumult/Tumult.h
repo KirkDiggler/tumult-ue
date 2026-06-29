@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "tumult/export.hpp"
 #include "tumult/breakdown.hpp"
 #include "tumult/character.hpp"
 #include "tumult/effects/bleed.hpp"

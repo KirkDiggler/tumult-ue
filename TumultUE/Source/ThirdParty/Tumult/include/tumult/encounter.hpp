@@ -13,6 +13,7 @@
 #include "rpg/core/topic.hpp"
 #include "tumult/breakdown.hpp"
 #include "tumult/character.hpp"
+#include "tumult/export.hpp"
 
 namespace tumult {
 

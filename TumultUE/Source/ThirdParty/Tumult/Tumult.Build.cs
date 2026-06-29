@@ -11,7 +11,7 @@ public class Tumult : ModuleRules
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 		CppStandard = CppStandardVersion.Cpp20;
 
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core" });
 
 		PublicIncludePaths.Add(ModuleDirectory);
 		PublicIncludePaths.Add(Path.Combine(ModuleDirectory, "include"));

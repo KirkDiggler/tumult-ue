@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
 # Sync the vendored Tumult module to pinned release tags.
-# Usage: ./scripts/sync-tumult.sh
+# Usage: TumultUE/scripts/sync-tumult.sh
 set -euo pipefail
 
 TUMULT_TAG="v0.1.0"
 RPGKIT_TAG="v0.3.0"
-DEST="Source/ThirdParty/Tumult"
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+DEST="$PROJECT_ROOT/Source/ThirdParty/Tumult"
 
 echo "Syncing Tumult $TUMULT_TAG + rpgkit $RPGKIT_TAG into $DEST..."
 
@@ -29,6 +32,25 @@ cp "$TMP/rpgkit/LICENSE" "$DEST/LICENSE.rpgkit"
 # The vendored snapshot is compiled as a separate Unreal module. Export the
 # non-inline Tumult classes that host modules instantiate across the DLL
 # boundary; upstream Tumult stays host-agnostic and does not carry UE macros.
+cat > "$DEST/include/tumult/export.hpp" <<'EXPORT_EOF'
+#ifndef TUMULT_EXPORT_HPP_
+#define TUMULT_EXPORT_HPP_
+
+#ifndef TUMULT_API
+#define TUMULT_API
+#endif
+
+#endif  // TUMULT_EXPORT_HPP_
+EXPORT_EOF
+
+sed -i \
+	-e '/#include "tumult\/character.hpp"/a #include "tumult/export.hpp"' \
+	"$DEST/include/tumult/encounter.hpp"
+sed -i \
+	-e '/#include "rpg\/core\/effect.hpp"/a #include "tumult/export.hpp"' \
+	"$DEST/include/tumult/effects/vulnerable.hpp" \
+	"$DEST/include/tumult/effects/tough_skin.hpp" \
+	"$DEST/include/tumult/effects/bleed.hpp"
 sed -i \
 	-e 's/class Encounter {/class TUMULT_API Encounter {/' \
 	"$DEST/include/tumult/encounter.hpp"

@@ -4,6 +4,7 @@
 #include <string>
 
 #include "rpg/core/effect.hpp"
+#include "tumult/export.hpp"
 
 namespace tumult {
 
