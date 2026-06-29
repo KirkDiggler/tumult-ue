@@ -54,6 +54,31 @@ const Character* Encounter::findCharacter(const std::string& id) const {
   return nullptr;
 }
 
+namespace {
+
+// Curate a Character into its host-facing view: drop the internal-only block,
+// materialize `alive` from the same predicate the Character already exposes.
+CombatantView viewOf(const Character& character) {
+  return CombatantView{.id = character.id,
+                       .name = character.name,
+                       .curHp = character.curHp,
+                       .maxHp = character.maxHp,
+                       .alive = character.isAlive()};
+}
+
+}  // namespace
+
+std::vector<CombatantView> Encounter::combatants() const {
+  std::vector<CombatantView> views;
+  if (hasHero_) {
+    views.push_back(viewOf(hero_));
+  }
+  if (hasEnemy_) {
+    views.push_back(viewOf(enemy_));
+  }
+  return views;
+}
+
 rpg::core::Bus& Encounter::bus() {
   // Precondition: call only while ready (after setup, before shutdown).
   // bus_ is null before setup and after shutdown; dereferencing it is UB.
@@ -199,6 +224,16 @@ StrikeResult Encounter::strike(const std::string& attacker, const std::string& t
   int hpDamage = result.finalDamage - blocked;
   targetPtr->curHp = std::max(0, targetPtr->curHp - hpDamage);
   result.hpAfter = targetPtr->curHp;
+
+  // Broadcast the resolved strike AFTER state is mutated, so a subscriber that
+  // reads combatants() in its handler sees post-strike HP. The synchronous
+  // answer remains the returned StrikeResult; this event is the push edge for
+  // observers (HUD, combat-log sink). A notification-delivery error has no
+  // recovery path here and must not alter the return — intentionally ignored.
+  rpg::core::Topic<StrikeResolved> resolvedTopic = strikeResolvedTopic().on(*bus_);
+  (void)resolvedTopic.publish(
+      StrikeResolved{.attackerId = attacker, .targetId = target, .result = result});
+
   return result;
 }
 

@@ -53,6 +53,23 @@ struct StrikeResult {
   std::vector<BreakdownStep> breakdown;
 };
 
+// Resolved-strike notification. strike() publishes this on the Encounter Bus
+// AFTER it mutates state and STILL returns StrikeResult unchanged: the return
+// is the caller's synchronous answer (pull), the event is the broadcast a HUD
+// or combat-log sink subscribes to once and reacts to each loop iteration
+// (push). It reuses StrikeResult as the single outcome shape — it is NOT the
+// request-shaped DamageEvent. Notification flavor (Topic<T>), as turn.ended.
+struct StrikeResolved {
+  std::string attackerId;
+  std::string targetId;
+  StrikeResult result;
+};
+
+inline const rpg::core::TopicDef<StrikeResolved>& strikeResolvedTopic() {
+  static const rpg::core::TopicDef<StrikeResolved> kDef{"combat.strike.resolved"};
+  return kDef;
+}
+
 // Stateful runtime owner of one encounter — a bus, two characters, and
 // (later) active effects + request-topic subscriptions. Mirrors rpgkit-ue's
 // URPGKitEncounterRuntime: same shape, no UObject.
@@ -71,6 +88,12 @@ class TUMULT_API Encounter {
   [[nodiscard]] bool isReady() const { return ready_; }
 
   [[nodiscard]] const Character* findCharacter(const std::string& id) const;
+
+  // A value snapshot of every combatant for host display. The host enumerates
+  // and renders current HP each iteration without pre-knowing ids and without
+  // holding a live pointer into internal state (later mutation cannot touch a
+  // returned snapshot). findCharacter(id) stays for point lookups.
+  [[nodiscard]] std::vector<CombatantView> combatants() const;
 
   rpg::core::Bus& bus();
 
