@@ -4,6 +4,16 @@
 
 #include "Engine/Engine.h"
 
+#include <string>
+
+namespace
+{
+FString ToFString(const std::string& Value)
+{
+	return FString(UTF8_TO_TCHAR(Value.c_str()));
+}
+}  // namespace
+
 void ATumultGameMode::BeginPlay()
 {
 	Super::BeginPlay();
@@ -17,7 +27,7 @@ void ATumultGameMode::BeginPlay()
 		TEXT("Tumult encounter: strike dealt %d dmg"), Result.finalDamage);
 	for (const tumult::CombatantView& Combatant : Encounter_.combatants())
 	{
-		const FString Name(UTF8_TO_TCHAR(Combatant.name.c_str()));
+		const FString Name = ToFString(Combatant.name);
 		Message += FString::Printf(
 			TEXT(" | %s HP %d/%d %s"),
 			*Name,
@@ -25,6 +35,26 @@ void ATumultGameMode::BeginPlay()
 			Combatant.maxHp,
 			Combatant.alive ? TEXT("alive") : TEXT("down"));
 	}
+
+	tumult::StrikeCard StrikeOne(Encounter_, "strike-1", "strike");
+	tumult::StrikeCard StrikeTwo(Encounter_, "strike-2", "strike");
+	tumult::StrikeCard HeavyStrike(Encounter_, "heavy-strike-1", "strike");
+
+	const auto AppendCard = [&Message](
+		int32 Slot, const tumult::StrikeCard& Card, const tumult::StrikeInput& Input)
+	{
+		Message += FString::Printf(
+			TEXT(" | [%d] %s (%s): %d dmg -> %s"),
+			Slot,
+			*ToFString(Card.id()),
+			*ToFString(Card.type()),
+			Input.base,
+			*ToFString(Input.targetId));
+	};
+
+	AppendCard(1, StrikeOne, tumult::StrikeInput{.targetId = "goblin", .base = 5});
+	AppendCard(2, StrikeTwo, tumult::StrikeInput{.targetId = "goblin", .base = 5});
+	AppendCard(3, HeavyStrike, tumult::StrikeInput{.targetId = "goblin", .base = 8});
 
 	UE_LOG(LogTemp, Display, TEXT("%s"), *Message);
 	if (GEngine != nullptr)

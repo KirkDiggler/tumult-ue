@@ -4,7 +4,9 @@
 
 #include "tumult/export.hpp"
 #include "tumult/breakdown.hpp"
+#include "tumult/card_format.hpp"
 #include "tumult/character.hpp"
+#include "tumult/cards/strike_card.hpp"
 #include "tumult/effects/bleed.hpp"
 #include "tumult/effects/tough_skin.hpp"
 #include "tumult/effects/vulnerable.hpp"
