@@ -48,6 +48,9 @@ Done means:
 
 Trigger one player action from Unreal and route it through Tumult.
 
+The first card interaction surface is debug keyboard input plus on-screen debug
+text. See `docs/card-interaction-surface.md`.
+
 Done means:
 
 - A button, key press, or debug command executes an action.
