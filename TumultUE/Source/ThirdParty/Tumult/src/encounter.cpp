@@ -70,7 +70,6 @@ CombatantView viewOf(const Character& character) {
 
 std::vector<CombatantView> Encounter::combatants() const {
   std::vector<CombatantView> views;
-  views.reserve(2);
   if (hasHero_) {
     views.push_back(viewOf(hero_));
   }
@@ -187,7 +186,8 @@ Character* Encounter::mutCharacter(const std::string& id) {
   return nullptr;
 }
 
-StrikeResult Encounter::strike(const std::string& attacker, const std::string& target, int base) {
+StrikeResult Encounter::strike(const std::string& attacker, const std::string& target, int base,
+                               const std::string& correlationId) {
   StrikeResult result;
   if (!ready_ || !bus_) {
     return result;
@@ -232,8 +232,10 @@ StrikeResult Encounter::strike(const std::string& attacker, const std::string& t
   // observers (HUD, combat-log sink). A notification-delivery error has no
   // recovery path here and must not alter the return — intentionally ignored.
   rpg::core::Topic<StrikeResolved> resolvedTopic = strikeResolvedTopic().on(*bus_);
-  (void)resolvedTopic.publish(
-      StrikeResolved{.attackerId = attacker, .targetId = target, .result = result});
+  (void)resolvedTopic.publish(StrikeResolved{.attackerId = attacker,
+                                             .targetId = target,
+                                             .result = result,
+                                             .correlationId = correlationId});
 
   return result;
 }

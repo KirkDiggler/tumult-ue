@@ -3,7 +3,7 @@
 # Usage: TumultUE/scripts/sync-tumult.sh
 set -euo pipefail
 
-TUMULT_TAG="v0.2.0"
+TUMULT_TAG="v0.3.0"
 RPGKIT_TAG="v0.3.0"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -52,6 +52,9 @@ sed -i \
 	"$DEST/include/tumult/effects/tough_skin.hpp" \
 	"$DEST/include/tumult/effects/bleed.hpp"
 sed -i \
+	-e '/#include "rpg\/core\/status.hpp"/a #include "tumult/export.hpp"' \
+	"$DEST/include/tumult/cards/strike_card.hpp"
+sed -i \
 	-e 's/class Encounter {/class TUMULT_API Encounter {/' \
 	"$DEST/include/tumult/encounter.hpp"
 sed -i \
@@ -63,6 +66,9 @@ sed -i \
 sed -i \
 	-e 's/class BleedEffect/class TUMULT_API BleedEffect/' \
 	"$DEST/include/tumult/effects/bleed.hpp"
+sed -i \
+	-e 's/class StrikeCard/class TUMULT_API StrikeCard/' \
+	"$DEST/include/tumult/cards/strike_card.hpp"
 
 printf 'tumult %s\nrpgkit %s\n' "$TUMULT_TAG" "$RPGKIT_TAG" > "$DEST/.pinned-tags"
 
